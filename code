@@ -1,0 +1,48 @@
+#include "cocos2d.h" 
+
+class spriteLayer : public cocos2d::Layer {
+public:
+	spriteLayer() {}
+	~spriteLayer() {}
+
+	virtual bool init() {
+		if (!Layer::init()) {
+			return false;
+		}
+
+
+		cocos2d::Sprite* mySprite = cocos2d::Sprite::create("Spaceship.png");
+
+		if (!mySprite) {
+			cocos2d::log("error:unable to load png");
+			return false;
+		}
+
+		mySprite->setPosition(cocos2d::Vec2(0, 0));
+
+		this->addChild(mySprite);
+
+		return true;
+	}
+	CREATE_FUNC(spriteLayer);
+};
+
+
+class spriteScene :public cocos2d::Scene {
+public:
+	spriteScene(){}
+	~spriteScene(){}
+
+	virtual bool init() {
+		if (!Scene::init()) {
+			return false;
+		}
+
+		auto layer = spriteLayer::create();
+		this->addChild(layer);
+
+		return true;
+	}
+	CREATE_FUNC(spriteScene);
+};
+
